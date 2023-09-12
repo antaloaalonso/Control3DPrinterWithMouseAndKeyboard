@@ -81,9 +81,12 @@ while running:
         ser.write(str.encode("G90\r\n"))
         time.sleep(0.1)
     if keys[pygame.K_SPACE]:
-        ser.write(str.encode("M106 S20\r\n"))  # Turn on laser
+        # Turn off the laser, then turn it on briefly, and turn it off again
+        time.sleep(0.02)
+        ser.write(str.encode("M107\r\n"))
+        ser.write(str.encode("M106 S20\r\n"))
         time.sleep(0.1)
-        ser.write(str.encode("M107\r\n"))  # Turn off laser
+        ser.write(str.encode("M107\r\n"))
         print("SPACE")
     if keys[pygame.K_q]:
         running = False
